@@ -1,0 +1,159 @@
+/* Reset default styles and apply a gradient background */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, #9dc3e6, #f48fb1, #ffab91);
+}
+
+/* Style for the main container */
+.main {
+    width: 100%;
+   min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Style for the form box */
+.formbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 40px;
+}
+
+/* Style for the search input */
+.search-input {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+#search-btn {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    height: 50px;
+    width: 400px;
+    border-radius: 8px;
+    outline: none;
+    padding: 5px 10px;
+    border: 1px solid black;
+}
+
+#btn {
+    height: 38px;
+    width: 135px;
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#btn:hover {
+    background-color: #2a6fd4;
+}
+
+/* Style for each fetched song */
+/*article {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    justify-content:space-evenly;
+}*/
+
+h3 {
+    margin-right: 20px;
+}
+
+audio {
+    margin-right: 20px;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+/* Increase the box size height */
+.song-box {
+    padding: 20px; /* Adjust padding as needed */
+}
+
+/* Make sure the currently playing song is displayed at the top */
+.songs-container {
+    display: flex;
+    flex-direction: column-reverse; /* Reverse the order to display the currently playing song at the top */
+    height: 600px; /* Set the desired height */
+    overflow-y: auto;
+    border: 5px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+mize scrollbar */
+.songs-container::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+/* Track */
+.songs-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the track */
+}
+
+/* Handle */
+.songs-container::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar handle */
+}
+
+/* Handle on hover */
+.songs-container::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the scrollbar handle on hover */
+}
+/* Hide scrollbar */
+.songs-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Webkit-based browsers */
+}
+
+.songs-container {
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+/* styles.css */
+#playlists {
+    display: flex;
+    flex-wrap: wrap; /* Allow playlists to wrap to the next line */
+}
+
+.playlist {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px; /* Adjust as needed */
+    width: 300px; /* Adjust as needed */
+    min-height: 200px;
+    box-sizing: border-box; /* Include padding and border in the width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.playlists{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 1px solid #ccc;
+    border: 1px solid #ccc;
+}

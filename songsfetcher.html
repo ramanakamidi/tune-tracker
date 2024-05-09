@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Songs Fetcher</title>
+    <link rel="stylesheet" href="song.css">
+</head>
+<body>
+<div class="main">
+  <div class="formbox">
+  <h1>Songs Fetcher</h1>
+    <div class="search-input">
+
+     <input id="search-btn" type="text" placeholder="search song">
+    <button type="submit" id="btn" onClick="fetchSongs(event)">search</button>
+
+ </div>
+</div>
+<div class="songscont">
+  <div id="songs" class="songs-container" style="display: none;">   </div>
+</div>
+    
+    <div id="playlists" class="playlists">    </div>
+
+</div>
+<script src="song.js"></script>
+</body>
+</html>
