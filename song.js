@@ -9,7 +9,7 @@ function fetchSongs(e) {
     if (!input || input === "") {
         alert("Please enter your song name");
     } else {
-        let url = `https://saavn.dev/api/search/songs?query=${input}`;
+        let url = `https://saavn.dev/api/search/songs?query=${input}&limit=30`;
         
 
         fetcher(url);
@@ -96,26 +96,28 @@ function renderSong(item, container, isCurrentlyPlaying) {
     }
 }
 
-
-
-// Define fetchPlaylistIds function
-async function fetchPlaylistIds() {
+// Function to fetch playlist IDs based on the selected option
+async function fetchPlaylistIds(selectedOption) {
     const playlistIds = [];
-    const response = await fetch('https://saavn.dev/api/search/playlists?query=telugu');
+    const response = await fetch(`https://saavn.dev/api/search/playlists?query=${selectedOption}&offset=0&limit=50`);
     const resp = await response.json();
-    for (let i = 0; i < 10; i++) {
+    const tot = resp.data.results;
+    for (let i = 0; i < tot.length; i++) {
         playlistIds.push(resp.data.results[i].id);
     }
     return playlistIds;
 }
 
-// Define fetchAndDisplayPlaylists function
-async function fetchAndDisplayPlaylists() {
+// Function to fetch and display playlists based on the selected option
+async function fetchAndDisplayPlaylists(selectedOption) {
     // Call fetchPlaylistIds function
-    const playlistIds = await fetchPlaylistIds();
+    const playlistIds = await fetchPlaylistIds(selectedOption);
 
-    // Continue with displaying playlists
+    // Clear the playlists container
     const playlistsContainer = document.getElementById('playlists');
+    playlistsContainer.innerHTML = '';
+
+    // Display playlists
     for (let i = 0; i < playlistIds.length; i++) {
         const response = await fetch(`https://saavn.dev/api/playlists?id=${playlistIds[i]}`);
         const result = await response.json();
@@ -124,9 +126,6 @@ async function fetchAndDisplayPlaylists() {
         playlistsContainer.appendChild(playlistElement);
     }
 }
-
-// Call fetchAndDisplayPlaylists function
-fetchAndDisplayPlaylists();
 
 // Function to create playlist element
 function createPlaylistElement(playlist) {
@@ -141,7 +140,7 @@ function createPlaylistElement(playlist) {
     const playlistLink = document.createElement('a');
     playlistLink.innerHTML = `
         <h2>${playlist.name}</h2>
-        <img src="${playlist.image[1].url}">
+        <img style="height:250px; width:250px;" src="${playlist.image[1].url}">
     `;
     playlistDiv.appendChild(playlistLink);
 
@@ -150,9 +149,9 @@ function createPlaylistElement(playlist) {
 
 // Function to display songs of the clicked playlist
 async function displayPlaylistSongs(playlistId) {
-    const response = await fetch(`https://saavn.dev/api/playlists?id=${playlistId}`);
+    const response = await fetch(`https://saavn.dev/api/playlists?id=${playlistId}&limit=30`);
     const data = await response.json();
-    const songs = data.data.songs; // Access songs directly from data
+    const songs = data.data.songs;
 
     // Clear the currently displayed songs
     const songsContainer = document.getElementById('songs');
@@ -160,7 +159,7 @@ async function displayPlaylistSongs(playlistId) {
 
     // Render songs of the playlist
     songs.forEach((song, index) => {
-        renderSong(song, songsContainer, index); // Pass index to renderSong function
+        renderSong(song, songsContainer, index);
 
         // Add event listener to play the next song when the current one ends
         const audio = document.getElementById(`audio-${index}`);
@@ -169,6 +168,7 @@ async function displayPlaylistSongs(playlistId) {
             const nextAudio = document.getElementById(`audio-${nextIndex}`);
             nextAudio.play();
         });
+        
     });
 
     // Autoplay the first song in the playlist
@@ -180,9 +180,8 @@ async function displayPlaylistSongs(playlistId) {
     songsContainer.style.display = "block";
 }
 
-
 // Function to render a song
-function renderSong(song, container, index) { // Add index parameter
+function renderSong(song, container, index) {
     const songBox = document.createElement('div');
     songBox.classList.add('song-box');
 
@@ -190,7 +189,7 @@ function renderSong(song, container, index) { // Add index parameter
     songTitle.textContent = song.name;
 
     const audio = document.createElement('audio');
-    audio.id = `audio-${index}`; // Set a unique id for each audio element
+    audio.id = `audio-${index}`;
     const audioSource = document.createElement('source');
     audioSource.src = song.downloadUrl[4].url;
     audioSource.type = 'audio/mp4';
@@ -207,3 +206,15 @@ function renderSong(song, container, index) { // Add index parameter
     container.appendChild(songBox);
 }
 
+// Event listener for dropdown change
+const dropdown = document.getElementById('lang');
+dropdown.addEventListener('change', async function(event) {
+    const selectedOption = dropdown.value;
+    await fetchAndDisplayPlaylists(selectedOption);
+});
+
+// Fetch and display playlists for the default option (Telugu) when the page loads
+window.onload = async function() {
+    const defaultOption = dropdown.value; // Get the default option value (Telugu)
+    await fetchAndDisplayPlaylists(defaultOption);
+};
