@@ -138,17 +138,23 @@ mize scrollbar */
 }
 
 .playlist {
+    cursor: pointer;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
     margin: 10px; /* Adjust as needed */
-    width: 300px; /* Adjust as needed */
-    min-height: 200px;
+    width: 300px; /* Fixed width */
+    height: 350px; /* Fixed height */
     box-sizing: border-box; /* Include padding and border in the width */
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.playlist:hover{
+    border: 4px solid #ffffff;
+
+}
+
 .playlists{
     display: flex;
     justify-content: center;
@@ -156,4 +162,31 @@ mize scrollbar */
     flex-wrap: wrap;
     border: 1px solid #ccc;
     border: 1px solid #ccc;
+    margin: 10px;
 }
+/* Style the select dropdown */
+#lang {
+    appearance: none; /* Hide default appearance */
+    padding: 10px; /* Add padding */
+    font-size: 16px; /* Set font size */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    background-color: #f9f9f9; /* Set background color */
+    width: 100px; /* Set width */
+    margin-top: 24px;
+    margin-bottom: 20px;
+    cursor: pointer; /* Change cursor to pointer */
+  }
+  
+  /* Style the dropdown options */
+  #lang option {
+    background-color: #fff; /* Set background color */
+    color: #333; /* Set text color */
+  }
+  
+  /* Style the selected option */
+  #lang option:checked {
+    background-color: #007bff; /* Set background color */
+    color: #fff; /* Set text color */
+  }
+  
