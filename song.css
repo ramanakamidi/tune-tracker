@@ -201,4 +201,10 @@ height:8vh;
 width:100%;
 
 }
+@media (max-width: 480px) {
+    #footer1 {
+        height:6vh;
+        font-size:18px;
+    }
+}
   
