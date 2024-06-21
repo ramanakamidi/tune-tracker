@@ -192,7 +192,12 @@ mize scrollbar */
   }
 #footer1{
 background-color:black;
-height:20vh;
+display:flex;
+justify-content:center;
+align-items: center;
+color:white;
+font-size:30px;
+height:8vh;
 width:100%;
 
 }
