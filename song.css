@@ -27,6 +27,7 @@ body {
     flex-direction: column;
     padding: 10px;
     margin-top: 40px;
+    width:100%;
 }
 
 /* Style for the search input */
