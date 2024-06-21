@@ -152,7 +152,7 @@ mize scrollbar */
     align-items: center;
 }
 .playlist:hover{
-    border: 4px solid #ffffff;
+    border: 4px solid blue;
 
 }
 
